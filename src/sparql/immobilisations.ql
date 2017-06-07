@@ -5,10 +5,10 @@ PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
-# détection immobilisations
+# détection immobilisations pour un mobile donné <MOBILE>
 SELECT ?depart (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END) ?LON ?LAT WHERE { GRAPH ?G {
   ?depart !geoloc:precedingPoint+ ?POINT .
-    ?POINT geoloc:mobile ?MOBILE ;
+    ?POINT geoloc:mobile <MOBILE> ;
       geo:lon ?LON ;
       geo:lat ?LAT ;  
       dct:date ?TIMESTAMP .
