@@ -9,28 +9,32 @@ PREFIX dct: <http://purl.org/dc/terms/>
 
 # Calcul distance depuis point de départ donné (mobile forcément le même pour tous les points)
 SELECT (sum(?DIST) as ?DISTANCE)
+       (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END)
+       (?BEGIN - ?END as ?DURATION)
 WHERE { GRAPH ?G {
     ?depart !geoloc:precedingPoint* ?POINT .
     ?POINT geo:lon ?LON ;
            geo:lat ?LAT .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
     ?POINT_BEFORE geo:lon ?LON0 ;
-                  geo:lat ?LAT0 .
+                  geo:lat ?LAT0 ;  
+        dct:date ?TIMESTAMP .
     BIND( afn:sqrt( (?LON-?LON0)*(?LON-?LON0) + (?LAT-?LAT0)*(?LAT-?LAT0) ) AS ?DIST)
 
 
   # détection immobilisations pour un mobile donné <MOBILE>
-  { SELECT ?depart (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END) ?LON ?LAT
+  { SELECT ?depart (min(?MOTIONLESS_TIMESTAMP) as ?STOP_BEGIN) (max(?MOTIONLESS_TIMESTAMP) as ?STOP_END) ?LON ?LAT
     WHERE { GRAPH ?G {
-      ?depart !geoloc:precedingPoint+ ?POINT .
-      ?POINT geoloc:mobile <MOBILE> ;
-        geo:lon ?LON ;
-        geo:lat ?LAT ;  
-        dct:date ?TIMESTAMP .
+      ?depart geoloc:mobile <MOBILE> ;
+              !geoloc:precedingPoint+ ?POINT .
+      ?POINT 
+        geo:lon ?MOTIONLESS_LON ;
+        geo:lat ?MOTIONLESS_LAT ;  
+        dct:date ?MOTIONLESS_TIMESTAMP .
       ?POINT_BEFORE geoloc:precedingPoint ?POINT .
-      ?POINT_BEFORE geo:lon ?LON0 ;
-                    geo:lat ?LAT0 .
-      FILTER( ?LON = ?LON0 && ?LAT = ?LAT0 )
-    } }
+      ?POINT_BEFORE geo:lon ?MOTIONLESS_LON0 ;
+                    geo:lat ?MOTIONLESS_LAT0 .
+      FILTER( ?MOTIONLESS_LON = ?MOTIONLESS_LON0 && ?MOTIONLESS_LAT = ?MOTIONLESS_LAT0 )
+    } } GROUPBY ?depart ?LON ?LAT
   }
 } }
