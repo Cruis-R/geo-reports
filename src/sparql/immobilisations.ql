@@ -9,11 +9,12 @@ PREFIX dct: <http://purl.org/dc/terms/>
 SELECT ?depart (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END) ?LON ?LAT WHERE { GRAPH ?G {
   ?depart geoloc:mobile <MOBILE> .
   ?depart (^ geoloc:precedingPoint)+ ?POINT .
-      geo:lon ?LON ;
+  ?POINT
+      geo:long ?LON ;
       geo:lat ?LAT ;
       dct:date ?TIMESTAMP .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
-    ?POINT_BEFORE geo:lon ?LON0 ;
+    ?POINT_BEFORE geo:long ?LON0 ;
                   geo:lat ?LAT0 .
     FILTER( ?LON = ?LON0 && ?LAT = ?LAT0 )
 } }
