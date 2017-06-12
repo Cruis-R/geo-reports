@@ -5,12 +5,12 @@ PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#>
 
 # Calcul distance depuis point de départ donné (mobile forcément le même pour tous les points)
-SELECT (sum(?DIST) as ?DISTANCE) WHERE { GRAPH ?G {
+SELECT ?DEPART (sum(?DIST) as ?DISTANCE) WHERE { GRAPH ?G {
     <depart> (^ geoloc:precedingPoint)* ?POINT .
-    ?POINT geo:lon ?LON ;
+    ?POINT geo:long ?LON ;
            geo:lat ?LAT .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
-    ?POINT_BEFORE geo:lon ?LON0 ;
+    ?POINT_BEFORE geo:long ?LON0 ;
                   geo:lat ?LAT0 .
     BIND( afn:sqrt( (?LON-?LON0)*(?LON-?LON0) + (?LAT-?LAT0)*(?LAT-?LAT0) ) AS ?DIST)
 } }

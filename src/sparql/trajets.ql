@@ -13,10 +13,10 @@ SELECT (sum(?DIST) as ?DISTANCE)
        (?BEGIN - ?END as ?DURATION)
 WHERE { GRAPH ?G {
     ?depart (^ geoloc:precedingPoint)* ?POINT .
-    ?POINT geo:lon ?LON ;
+    ?POINT geo:long ?LON ;
            geo:lat ?LAT .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
-    ?POINT_BEFORE geo:lon ?LON0 ;
+    ?POINT_BEFORE geo:long ?LON0 ;
                   geo:lat ?LAT0 ;  
         dct:date ?TIMESTAMP .
     BIND( afn:sqrt( (?LON-?LON0)*(?LON-?LON0) + (?LAT-?LAT0)*(?LAT-?LAT0) ) AS ?DIST)
@@ -28,11 +28,11 @@ WHERE { GRAPH ?G {
       ?depart geoloc:mobile <MOBILE> ;
               (^ geoloc:precedingPoint)+ ?POINT .
       ?POINT 
-        geo:lon ?MOTIONLESS_LON ;
+        geo:long ?MOTIONLESS_LON ;
         geo:lat ?MOTIONLESS_LAT ;  
         dct:date ?MOTIONLESS_TIMESTAMP .
       ?POINT_BEFORE geoloc:precedingPoint ?POINT .
-      ?POINT_BEFORE geo:lon ?MOTIONLESS_LON0 ;
+      ?POINT_BEFORE geo:long ?MOTIONLESS_LON0 ;
                     geo:lat ?MOTIONLESS_LAT0 .
       FILTER( ?MOTIONLESS_LON = ?MOTIONLESS_LON0 && ?MOTIONLESS_LAT = ?MOTIONLESS_LAT0 )
     } } GROUPBY ?depart ?LON ?LAT
