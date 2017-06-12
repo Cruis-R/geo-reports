@@ -12,7 +12,7 @@ SELECT (sum(?DIST) as ?DISTANCE)
        (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END)
        (?BEGIN - ?END as ?DURATION)
 WHERE { GRAPH ?G {
-    ?depart !geoloc:precedingPoint* ?POINT .
+    ?depart (^ geoloc:precedingPoint)* ?POINT .
     ?POINT geo:lon ?LON ;
            geo:lat ?LAT .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
@@ -26,7 +26,7 @@ WHERE { GRAPH ?G {
   { SELECT ?depart (min(?MOTIONLESS_TIMESTAMP) as ?STOP_BEGIN) (max(?MOTIONLESS_TIMESTAMP) as ?STOP_END) ?LON ?LAT
     WHERE { GRAPH ?G {
       ?depart geoloc:mobile <MOBILE> ;
-              !geoloc:precedingPoint+ ?POINT .
+              (^ geoloc:precedingPoint)+ ?POINT .
       ?POINT 
         geo:lon ?MOTIONLESS_LON ;
         geo:lat ?MOTIONLESS_LAT ;  

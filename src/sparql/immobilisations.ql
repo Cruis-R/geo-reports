@@ -7,8 +7,8 @@ PREFIX dct: <http://purl.org/dc/terms/>
 
 # détection immobilisations pour un mobile donné <MOBILE>
 SELECT ?depart (min(?TIMESTAMP) as ?BEGIN) (max(?TIMESTAMP) as ?END) ?LON ?LAT WHERE { GRAPH ?G {
-  ?depart !geoloc:precedingPoint+ ?POINT .
-    ?POINT geoloc:mobile <MOBILE> ;
+  ?depart geoloc:mobile <MOBILE> .
+  ?depart (^ geoloc:precedingPoint)+ ?POINT .
       geo:lon ?LON ;
       geo:lat ?LAT ;
       dct:date ?TIMESTAMP .

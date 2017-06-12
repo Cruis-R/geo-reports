@@ -6,7 +6,7 @@ PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#>
 
 # Calcul distance depuis point de départ donné (mobile forcément le même pour tous les points)
 SELECT (sum(?DIST) as ?DISTANCE) WHERE { GRAPH ?G {
-    <depart> !geoloc:precedingPoint* ?POINT .
+    <depart> (^ geoloc:precedingPoint)* ?POINT .
     ?POINT geo:lon ?LON ;
            geo:lat ?LAT .
     ?POINT_BEFORE geoloc:precedingPoint ?POINT .
