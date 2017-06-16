@@ -1,0 +1,9 @@
+PREFIX : <http://deductions.github.io/geoloc.owl.ttl#>
+
+SELECT ?S (STR(?DEB) as ?DEBUT) (STR(?FI) as ?FIN) (STR(?DIST) as ?DISTANCE)
+WHERE {
+  ?S :begin ?DEB .
+  ?S :end ?FI .
+  ?S :distance ?DIST .
+}
+ORDER BY ?S

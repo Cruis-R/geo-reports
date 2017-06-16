@@ -1,0 +1,11 @@
+PREFIX geoloc: <http://deductions.github.io/geoloc.owl.ttl#>
+PREFIX dct: <http://purl.org/dc/terms/>
+CONSTRUCT {
+      ?DEPART ?P ?O .
+} WHERE {
+  GRAPH ?G {
+          ?DEPART geoloc:mobile ?MOBILE ;
+                  ?P ?O ;
+         dct:date ?DATE .
+      }  }
+ORDER BY DESC(?DATE)
