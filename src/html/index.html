@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+<a href="/page=geo:stats">Statistiques: distances par jour, mois en cours et précedent</a>
+<p/>
+<a href="/select-ui?query=PREFIX+geoloc%3A+%3Chttp%3A%2F%2Fdeductions.github.io%2Fgeoloc.owl.ttl%23%3E%0D%0A%0D%0ASELECT+%3Fmobile+%28count%28%3FDEPART%29+as+%3Fpoints%29+WHERE+%7B++GRAPH+%3FG+%7B%0D%0A++++++%23+%3FDEPART+geoloc%3Amobile+%3Cimei%3A863977030715952%3E+.%0D%0A++++++%3FDEPART+geoloc%3Amobile+%3Fmobile+.%0D%0A++%7D++%7D%0D%0Agroup+by+%3Fmobile
+">Statistiques: nombre de points par véhicule</a>
+<p/>
+<a href="http://rawgit.com/Cruis-R/geo-map-component/master/docs/index.html">Carte des trajets</a>
+<p/>
+<a href="/table?query=PREFIX+geoloc%3A+%3Chttp%3A%2F%2Fdeductions.github.io%2Fgeoloc.owl.ttl%23%3E%0D%0APREFIX+vehman%3A+%3Chttp%3A%2F%2Fdeductions.github.io%2Fvehicule-management.owl.ttl%23%3E%0D%0A%0D%0ACONSTRUCT+%7B%0D%0A++%3FMOB+%3FP+%3FO+.%0D%0A++%3FMOB+vehman%3AinternalNumber+%3FNUM.%0D%0A%7D+WHERE+%7B%0D%0A++%7B+GRAPH+%3FGR+%7B%0D%0A++++%3FMOB+a+geoloc%3AMobile+.%0D%0A++++%7D%0D%0A%7D+OPTIONAL+%7B%0D%0A++GRAPH+%3FGR1+%7B%0D%0A++++%3FMOB+%3FP+%3FO+.%0D%0A++++%3FMOB+vehman%3Avehicle+%3FVEHICULE.%0D%0A++++%3FVEHICULE+vehman%3AinternalNumber+%3FNUM.%0D%0A++%7D%0D%0A++%7D%0D%0A%7D">Liste des scooters par IMEI</a>
+<p/>
+</body>
+</html>
