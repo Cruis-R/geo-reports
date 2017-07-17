@@ -1,8 +1,10 @@
 <html>
 <head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-type"/>
 </head>
 <body>
-<a href="/page=geo:stats">Statistiques: distances par jour, mois en cours et précedent</a>
+<h3>Mobion - Cruis'R</h3>
+<a href="/page?feature=geoloc:stats">Statistiques: distances par jour, mois en cours et précédent</a>
 <p/>
 <a href="/select-ui?query=PREFIX+geoloc%3A+%3Chttp%3A%2F%2Fdeductions.github.io%2Fgeoloc.owl.ttl%23%3E%0D%0A%0D%0ASELECT+%3Fmobile+%28count%28%3FDEPART%29+as+%3Fpoints%29+WHERE+%7B++GRAPH+%3FG+%7B%0D%0A++++++%23+%3FDEPART+geoloc%3Amobile+%3Cimei%3A863977030715952%3E+.%0D%0A++++++%3FDEPART+geoloc%3Amobile+%3Fmobile+.%0D%0A++%7D++%7D%0D%0Agroup+by+%3Fmobile
 ">Statistiques: nombre de points par véhicule</a>
